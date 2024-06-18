@@ -5,6 +5,9 @@
 * `git`
 * GNU `make`
 
+### Utility firvcmd
+* `firvcmd <run | rnu-gdb | rust-kernel | rust-asm | rust-ll> <target_file>` - target file respresens either `.rs` file or `.elf` file fot build and runs
+
 ### Running RISC-V examples
 * `qemu` (the `qemu-system-riscv64` binary)
 

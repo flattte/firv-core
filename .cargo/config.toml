@@ -1,9 +1,10 @@
 [target.riscv64gc-unknown-none-elf]
 rustflags = [
-    "-Clink-arg=-Tres/rv64-virt/rust-link.ld",   # Linker script
+    "-Clink-arg=-Tres/rv64-virt/rust-link.ld", # Linker script
 ]
 runner = "qemu-system-riscv64 -machine virt -nographic -bios none -kernel "
 
 [build]
-target = "riscv64gc-unknown-none-elf"    # Select target (valid targets can be found by "rustup target list")
-
+target = "riscv64gc-unknown-none-elf"                                                                                        # Select target (valid targets can be found by "rustup target list")
+rustc = "/Users/awmann/smooth/firv-explore/firv-rust/build/host/stage1/bin/rustc"
+rustflags = "-Clink-arg=-Tres/rv64-virt/rust-link.ld -Clinker=riscv64-unknown-elf-ld -O -Cpanic=abort -Coverflow-checks=off"

@@ -9,3 +9,5 @@
 
 !src/*
 build
+
+.DS_Store

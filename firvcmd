@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+FIRVC="path to firv rust compiler"
+
+case $1 in
+  "rust-kernel") 
+    make rust-kernel \
+      RUSTC=$FIRVC \
+      SRC=$2
+  ;;
+  "rust-ll")
+    make rust-ll \
+      RUSTC=$FIRVC \
+      SRC=$2
+  ;;
+  "rust-asm")
+    make rust-asm \
+      RUSTC=$FIRVC \
+      SRC=$2
+    
+  ;;
+  "run")
+    qemu-system-riscv64 -nographic -machine virt -bios none -kernel ./build/$
+  ;;
+  "run-gdb")
+    # -s option is a shorthand for -gdb tcp::1234 so the attach is on 1234 port
+    # then `riscv64-unknown-elf-gdb ./build/harden.elf`
+    # theni(gdb) target remote localhost:1234
+    qemu-system-riscv64 -nographic -machine virt -bios none -kernel ./build/$2 -s -S 
+  ;;
+  *)
+    echo "cmds: firvcmd <run | rust-kernel | rust-asm | rust-ll>"
+  ;;
+esac
