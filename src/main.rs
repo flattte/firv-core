@@ -22,14 +22,12 @@ unsafe fn mmio_write<T>(addr: usize, value: T) {
 }
 
 fn sw_exit() {
-    unsafe {
-        mmio_write(SYSCON, SHUTDOWN as u32)
-    }
+    unsafe { mmio_write(SYSCON, SHUTDOWN as u32) }
 }
 
 fn sw_print(s: &str) -> () {
     for c in s.bytes() {
-        unsafe{
+        unsafe {
             mmio_write(UART, c as u8);
         }
     }

@@ -2,16 +2,13 @@
 #![no_builtins]
 #![no_main]
 
-use core::{
-    arch::global_asm,
-    panic::PanicInfo,
-};
+use core::{arch::global_asm, panic::PanicInfo};
 
 global_asm!(include_str!("../res/entry.s"));
 
 /// A panic handler is required in Rust, this is probably the most basic one possible
 #[panic_handler]
-extern fn panic(_info: &PanicInfo) -> ! {
+extern "C" fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }
 
@@ -26,13 +23,11 @@ unsafe fn mmio_write<T>(addr: usize, value: T) {
 }
 
 fn exit() {
-    unsafe {
-        mmio_write(SYSCON, SHUTDOWN as u32)
-    }
+    unsafe { mmio_write(SYSCON, SHUTDOWN as u32) }
 }
 
 fn putc(c: char) -> () {
-    unsafe{
+    unsafe {
         mmio_write(UART, c as u8);
         mmio_write(UART, '\n');
     }
@@ -40,8 +35,7 @@ fn putc(c: char) -> () {
 
 #[firv_harden]
 #[no_mangle]
-extern "C"
-fn sw_f(a: i32, b: i32) -> i32 {
+extern "C" fn sw_f(a: i32, b: i32) -> i32 {
     let x = a + b;
     let y = a - b;
 

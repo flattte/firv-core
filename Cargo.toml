@@ -5,4 +5,20 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[[bin]]
+name = "harden"
+path = "src/harden.rs"
+
+[[bin]]
+name = "array"
+path = "src/array.rs"
+
+[[bin]]
+name = "basic_tests"
+path = "src/basic_tests.rs"
+
+[[bin]]
+name = "mutable_side_effect"
+path = "src/mutable_side_effect.rs"
+
 [dependencies]
